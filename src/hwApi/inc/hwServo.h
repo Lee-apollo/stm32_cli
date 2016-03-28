@@ -7,9 +7,9 @@
 #define MIN_PULSE_WIDTH              1000 //us
 #define MAX_PULSE_WIDTH              2000 //us
 
-//timer pulse 1700 = 1ms
+//timer pulse 840 = 1ms
 
-#define microsecToTimerPulse(X) ((X / 10) * 17)
+#define microsecToTimerPulse(X) ((X * 840)/1000)
 
 #define MIN_ANGLE             0
 #define MAX_ANGLE             180 //us

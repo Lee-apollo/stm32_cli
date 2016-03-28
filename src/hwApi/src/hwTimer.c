@@ -14,9 +14,9 @@ void TIM_Timer4_Init()
     __TIM4_CLK_ENABLE();
 
     handleTimer4.Instance = TIM4; //Select timer
-    handleTimer4.Init.Prescaler = 200; //
+    handleTimer4.Init.Prescaler = 100; //
     handleTimer4.Init.CounterMode = TIM_COUNTERMODE_UP;
-    handleTimer4.Init.Period = 33600;
+    handleTimer4.Init.Period = 16800;
     handleTimer4.Init.RepetitionCounter = 0;
     handleTimer4.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
 
@@ -26,7 +26,7 @@ void TIM_Timer4_Init()
     //HAL_TIM_Base_Init(&handleTimer4);     // Init timer
     //HAL_TIM_Base_Start_IT(&handleTimer4); // start timer interrupts
     HAL_NVIC_SetPriority(TIM4_IRQn, 0, 1);
-    HAL_NVIC_EnableIRQ(TIM4_IRQn);
+    //HAL_NVIC_EnableIRQ(TIM4_IRQn);
     /*
     //handleTimer4.Channel = 1;
 
@@ -81,7 +81,7 @@ void InitializePWM()
     TIM_OC_InitTypeDef outputChannelInit = {0,};
 
     outputChannelInit.OCMode = TIM_OCMODE_PWM1;
-    outputChannelInit.Pulse = 1700;
+    outputChannelInit.Pulse = 840;
     outputChannelInit.OCPolarity = TIM_OCPOLARITY_HIGH;
     outputChannelInit.OCFastMode = TIM_OCFAST_DISABLE;
     outputChannelInit.OCIdleState = TIM_OCIDLESTATE_SET;
@@ -118,6 +118,8 @@ void updatePulseWidth(eTimer timer, uint32_t pulse, uint32_t channel)
     {
     case eTimer4:
         HAL_TIM_PWM_ConfigChannel(&handleTimer4, &outputChannelInit, channel);
+        HAL_TIM_PWM_Start(&handleTimer4, channel);
+
         break;
     case eTimer1:
     case eTimer2:

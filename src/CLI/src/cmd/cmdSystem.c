@@ -60,7 +60,11 @@ void cmdHelpFunction(int argc, const char * argv[])
 
 void cmdServoFunction(int argc, const char * argv[])
 {
-    if (argc ==  3)
+    if (argc !=  3)
+    {
+        serialPrintf("\nUsage: SRV channel angle(0-180)");
+    }
+    else
     {
         int servoChannel = atoi(argv[1]);
         int servoAngle = atoi(argv[2]);
